@@ -1,0 +1,24 @@
+{
+  "name": "aidcp-transport",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "aidcp 云端三服务的共享传输层：跨进程内部 HTTP 的骨架与逐能力的『服务端注册 + 客户端 + 路径常量』三件套。与 aidcp-kernel 的分工是『有副作用但三家都要』vs『零副作用的类型与契约』。",
+  "engines": { "node": ">=20" },
+  "exports": {
+    "./*.js": { "types": "./dist/*.d.ts", "default": "./dist/*.js" }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#3761197"
+  }
+}
