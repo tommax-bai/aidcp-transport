@@ -19,6 +19,6 @@
   },
   "files": ["dist"],
   "dependencies": {
-    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#0fa2588e26ac19742c9b71bdff217b6236090c67"
+    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#65a81a331550d82a1ca757def28f654fc4001eb0"
   }
 }
