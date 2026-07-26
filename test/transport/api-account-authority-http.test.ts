@@ -33,7 +33,13 @@ async function withAccountServer(
   const roster: AccountRosterAuthorityPort = {
     async listAccountIdentities() {
       ownerCalls.push('listAccountIdentities');
-      return [{ accountId: 'acct-1', platform: 'facebook', groupLabel: 'north' }];
+      return [{
+        accountId: 'acct-1',
+        platform: 'facebook',
+        groupLabel: 'north',
+        createdAt: 1_700_000_000_000,
+        status: 'active',
+      }];
     },
   };
   const ownership: AccountOwnershipAuthorityPort = {
@@ -98,7 +104,13 @@ test('account 4a routes keep 1/3/4 method parity and omit claimExecutionTarget',
     const roster = new AccountRosterHttpClient(http, TOKEN, 'dev');
     const ownership = new AccountOwnershipHttpClient(http, TOKEN, 'dev');
     const runtime = new AccountRuntimeHttpClient(http, TOKEN, 'dev');
-    assert.equal((await roster.listAccountIdentities())[0]?.groupLabel, 'north');
+    assert.deepEqual((await roster.listAccountIdentities())[0], {
+      accountId: 'acct-1',
+      platform: 'facebook',
+      groupLabel: 'north',
+      createdAt: 1_700_000_000_000,
+      status: 'active',
+    });
     assert.equal(await ownership.getExecutionTarget('acct-1'), 'dev');
     assert.deepEqual(await ownership.resolveExecutionTarget('acct-1'), {
       outcome: 'owned',

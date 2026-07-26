@@ -29,7 +29,7 @@
     "dist"
   ],
   "dependencies": {
-    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#e83465194e10358841ced543e33875af649b3c2d",
+    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#f55718cbc5a856d0410d1bea1d89fc22a59fcaf5",
     "pg": "^8.13.1"
   }
 }
