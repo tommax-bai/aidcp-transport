@@ -16,18 +16,20 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepare": "tsc -p tsconfig.json",
+    "test": "tsx --test 'test/**/*.test.ts'",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^5.7.2",
+    "tsx": "^4.19.2",
     "@types/pg": "^8.11.10"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#1d7e89bff5f9c9ec93a3ebd25a3c690093667ca2",
+    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#bb132db84fe85cfdb90de5b116e596d7e6426657",
     "pg": "^8.13.1"
   }
 }
