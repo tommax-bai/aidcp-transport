@@ -15,8 +15,11 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "outDir": "dist",
-    "rootDir": "."
+    // rootDir MUST 是 "src"：它与 package.json 的 exports 映射（"./*.js" → "./dist/*.js"）互为前提。
+    // 写成 "." 会把产物埋到 dist/src/ 下，于是每一条 exports 都指向不存在的路径 —— 本包照样编译通过、
+    // 照样发得出去，只有第一个真去 import 它的仓才会撞上一片 TS2307。与 aidcp-kernel 同一口径。
+    "rootDir": "src"
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
