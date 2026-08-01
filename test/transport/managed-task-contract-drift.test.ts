@@ -12,6 +12,7 @@ import {
   InternalHttpServer,
 } from '../../src/transport/internal-http.js';
 import {
+  MANAGED_TASK_CONTRACT as TRANSPORT_MANAGED_TASK_CONTRACT,
   MANAGED_TASK_ROUTES,
   ManagedTaskHttpClient,
   registerManagedTaskRoutes,
@@ -60,6 +61,7 @@ function request(): ManagedTaskEnvelope<CreateManagedTaskInput> {
 
 test('route version and kernel contract version advance as one explicit v1 boundary', () => {
   assert.deepEqual(MANAGED_TASK_CONTRACT, { name: 'managed-task', version: 1 });
+  assert.equal(TRANSPORT_MANAGED_TASK_CONTRACT, MANAGED_TASK_CONTRACT);
   assert.deepEqual(Object.values(MANAGED_TASK_ROUTES), [
     'internal/managed-task/v1/create',
     'internal/managed-task/v1/cancel',

@@ -23,6 +23,27 @@ import {
   type InternalHttpServer,
 } from './internal-http.js';
 
+// Consumers of the HTTP port should not need a second, potentially incompatible direct kernel
+// pin merely to name the DTOs carried by this transport package. Runtime authority still lives in
+// kernel; this is a transparent boundary re-export, not a second contract definition.
+export { MANAGED_TASK_CONTRACT };
+export type {
+  CancelManagedTaskInput,
+  CancelManagedTaskResult,
+  CreateManagedTaskInput,
+  CreateManagedTaskResult,
+  ManagedTaskActor,
+  ManagedTaskCommandPort,
+  ManagedTaskEnvelope,
+  ManagedTaskJson,
+  ManagedTaskProjection,
+  ManagedTaskProjectionState,
+  ManagedTaskRejection,
+  ManagedTaskRejectionCode,
+  QueryManagedTaskInput,
+  QueryManagedTaskResult,
+};
+
 /** Shared route names keep API clients and Automation route registration on one versioned wire. */
 export const MANAGED_TASK_ROUTES = {
   create: 'internal/managed-task/v1/create',
