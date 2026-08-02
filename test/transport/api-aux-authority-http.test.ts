@@ -45,14 +45,15 @@ import {
 
 const TOKEN = 'api-aux-token';
 
-test('aux authority route tables preserve independent 2/1/1/1/1/3/3/1 faces', () => {
+test('aux authority route tables preserve independent 2/1/1/1/1/3/4/1 faces', () => {
   assert.equal(Object.keys(ACCOUNT_PERSONA_ROUTES).length, 2);
   assert.equal(Object.keys(ENVIRONMENT_HANDSHAKE_ROUTES).length, 1);
   assert.equal(Object.keys(COMMENT_APPROVAL_POLICY_ROUTES).length, 1);
   assert.equal(Object.keys(NOTIFICATION_CONTACTS_ROUTES).length, 1);
   assert.equal(Object.keys(FIRST_POST_PROGRESS_ROUTES).length, 1);
   assert.equal(Object.keys(AUTOMATION_CONFIG_COMMANDS_ROUTES).length, 3);
-  assert.equal(Object.keys(OFFBOARD_ADMISSION_LEDGER_ROUTES).length, 3);
+  // 3 写 + 1 读：撤权 hold 的读面与写面同属一本台账，故同组。
+  assert.equal(Object.keys(OFFBOARD_ADMISSION_LEDGER_ROUTES).length, 4);
   assert.equal(Object.keys(STRUCTURED_NOTIFICATION_ROUTES).length, 1);
 });
 
