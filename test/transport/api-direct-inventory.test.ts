@@ -8,7 +8,7 @@ import {
 } from 'aidcp-kernel/kernel/api-direct-port.js';
 import { API_DIRECT_ROUTE_INVENTORY } from '../../src/transport/api-direct-http.js';
 
-test('4a transport exports exactly the admitted 21-group/58-slot route surface', () => {
+test('4a transport exports exactly the admitted 21-group/59-slot route surface', () => {
   const contractGroups = Object.keys(API_DIRECT_PORT_INVENTORY);
   const routeGroups = Object.keys(API_DIRECT_ROUTE_INVENTORY);
   assert.deepEqual(routeGroups, contractGroups);
@@ -17,7 +17,7 @@ test('4a transport exports exactly the admitted 21-group/58-slot route surface',
       (total, methods) => total + methods.length,
       0,
     ),
-    58,
+    59,
   );
   for (const group of contractGroups) {
     const methods = API_DIRECT_PORT_INVENTORY[group as keyof typeof API_DIRECT_PORT_INVENTORY];

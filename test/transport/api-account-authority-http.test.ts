@@ -41,6 +41,16 @@ async function withAccountServer(
         status: 'active',
       }];
     },
+    async listAccountDirectory() {
+      ownerCalls.push('listAccountDirectory');
+      return [{
+        accountId: 'acct-1',
+        displayName: '工程师大白',
+        names: ['工程师大白', '大白'],
+        platform: 'facebook',
+        status: 'active',
+      }];
+    },
   };
   const ownership: AccountOwnershipAuthorityPort = {
     async getExecutionTarget(accountId) {
@@ -88,8 +98,11 @@ async function withAccountServer(
   }
 }
 
-test('account 4a routes keep 1/3/4 method parity and omit claimExecutionTarget', async () => {
-  assert.deepEqual(Object.keys(ACCOUNT_ROSTER_ROUTES), ['listAccountIdentities']);
+test('account 4a routes keep 2/3/5 method parity and omit claimExecutionTarget', async () => {
+  assert.deepEqual(Object.keys(ACCOUNT_ROSTER_ROUTES), [
+    'listAccountIdentities',
+    'listAccountDirectory',
+  ]);
   assert.deepEqual(Object.keys(ACCOUNT_OWNERSHIP_ROUTES), [
     'getExecutionTarget',
     'resolveExecutionTarget',
@@ -115,6 +128,16 @@ test('account 4a routes keep 1/3/4 method parity and omit claimExecutionTarget',
       createdAt: 1_700_000_000_000,
       status: 'active',
     });
+    // 目录那一条是**另一条路由**：守卫花名册给不出显示名与别名候选，而按昵称选号只认后者。
+    assert.deepEqual(await roster.listAccountDirectory(), [
+      {
+        accountId: 'acct-1',
+        displayName: '工程师大白',
+        names: ['工程师大白', '大白'],
+        platform: 'facebook',
+        status: 'active',
+      },
+    ]);
     assert.equal(await ownership.getExecutionTarget('acct-1'), 'dev');
     assert.deepEqual(await ownership.resolveExecutionTarget('acct-1'), {
       outcome: 'owned',
@@ -134,7 +157,7 @@ test('account 4a routes keep 1/3/4 method parity and omit claimExecutionTarget',
     // 批 H：暂停账号。原因随命令一起过去 —— 属主要把它写进日志。
     await runtime.pauseAccount('acct-1', 'join_failed');
     assert.equal(calls.at(-1), 'pauseAccount:acct-1:join_failed');
-    assert.equal(calls.length, 9);
+    assert.equal(calls.length, 10);
   });
 });
 
