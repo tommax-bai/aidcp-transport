@@ -20,7 +20,7 @@ import type {
   MaterializeEnvironmentOffboardOutcome,
   OffboardMaterializationOperations,
 } from 'aidcp-kernel/kernel/offboard-materialization-types.js';
-import type { InternalHttpClient, InternalHttpServer } from './internal-http.js';
+import type { InternalCallSink, InternalRouteSink } from './internal-http.js';
 
 export const OFFBOARD_MATERIALIZATION_ROUTES = {
   materializeEnvironmentOffboard: 'offboard-materialization/materialize-environment-offboard',
@@ -28,7 +28,7 @@ export const OFFBOARD_MATERIALIZATION_ROUTES = {
 
 /** 在属主进程里把物化操作挂上。 */
 export function registerOffboardMaterializationRoutes(
-  server: InternalHttpServer,
+  server: InternalRouteSink,
   local: OffboardMaterializationOperations,
 ): void {
   server.register(
@@ -44,7 +44,7 @@ export function registerOffboardMaterializationRoutes(
  * 那种错编译得过、要真跑起来才现形。
  */
 export class OffboardMaterializationHttpClient implements OffboardMaterializationOperations {
-  constructor(private readonly http: InternalHttpClient) {}
+  constructor(private readonly http: InternalCallSink) {}
 
   materializeEnvironmentOffboard(
     input: MaterializeEnvironmentOffboardInput,

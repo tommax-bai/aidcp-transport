@@ -22,7 +22,7 @@ import type {
   IssueOffboardCleanupGrantInput,
   OffboardCleanupGrantOperations,
 } from 'aidcp-kernel/kernel/offboard-cleanup-grant-types.js';
-import type { InternalHttpClient, InternalHttpServer } from './internal-http.js';
+import type { InternalCallSink, InternalRouteSink } from './internal-http.js';
 
 export const OFFBOARD_CLEANUP_GRANT_ROUTES = {
   issueCleanupGrant: 'offboard-cleanup-grant/issue',
@@ -31,7 +31,7 @@ export const OFFBOARD_CLEANUP_GRANT_ROUTES = {
 
 /** 在属主进程里把两个操作挂上。端口是闭集合，**一条不少地开**。 */
 export function registerOffboardCleanupGrantRoutes(
-  server: InternalHttpServer,
+  server: InternalRouteSink,
   local: OffboardCleanupGrantOperations,
 ): void {
   server.register(OFFBOARD_CLEANUP_GRANT_ROUTES.issueCleanupGrant, (args) =>
@@ -49,7 +49,7 @@ export function registerOffboardCleanupGrantRoutes(
  * 那种错编译得过、要真跑起来才现形。
  */
 export class OffboardCleanupGrantHttpClient implements OffboardCleanupGrantOperations {
-  constructor(private readonly http: InternalHttpClient) {}
+  constructor(private readonly http: InternalCallSink) {}
 
   issueCleanupGrant(input: IssueOffboardCleanupGrantInput): Promise<boolean> {
     return this.http.call<boolean>(OFFBOARD_CLEANUP_GRANT_ROUTES.issueCleanupGrant, {
