@@ -21,15 +21,15 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "typescript": "^5.7.2",
+    "@types/pg": "^8.11.10",
     "tsx": "^4.19.2",
-    "@types/pg": "^8.11.10"
+    "typescript": "^5.7.2"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "aidcp-kernel": "git+ssh://git@github.com/tommax-bai/aidcp-kernel.git#5aab64b22aaaa48f732cdfef6d9d5f5ece08b1d9",
+    "aidcp-kernel": "github:tommax-bai/aidcp-kernel#2fcbfdd5a9199f049f077e54dccbc6b827a1d175",
     "pg": "^8.13.1"
   }
 }
